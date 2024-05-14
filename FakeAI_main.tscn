@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://bsphf0a50dht2"]
 
-[ext_resource type="Script" path="res://FakeAI/FakeAI_main.gd" id="1_go8po"]
+[ext_resource type="Script" path="res://FakeAI_main.gd" id="1_go8po"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nltbp"]
 bg_color = Color(0, 0, 0, 1)
