@@ -39,7 +39,11 @@ func get_response(user_input: String) -> String:
 		"creator like" : ["He has an attention disorder. So very focused one second, and elsewhere at the same time"],
 		"exit" : [user + " it doesn't work like that. It's the 90s and you need to know the exact command."],
 		"favorite color" : ["Maybe...Red", "Maybe...White", "Maybe...Blue"],
-		"up up down down left right left right b a start": ["Sorry.. " + user + " this code lost meaning a long time ago..."]
+		"up up down down left right left right b a start": ["Sorry.. " + user + " this code lost meaning a long time ago..."],
+		"play game" : ["Sorry " + user + ", I can't play games at this time.  Perhaps in a later big update?"],
+		"what is your favorite animal" : ["That is easy, Dogs are my favorite."],
+		"what is your least favorite animal" : ["Mmmm, Cats, Snakes and so forth."],
+		"do you like videogames" : ["Oh! I do " + user + "! Chrono Trigger is my favorite!  ...don't tell my creator, ok?"]
 		
 		# Add more keys and response until better method found
 	}
