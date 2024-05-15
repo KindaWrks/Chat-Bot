@@ -38,15 +38,23 @@ func get_response(user_input: String) -> String:
 		"who is your creator" : ["I'm sorry, Dave. I'm afraid I can't do that" + "   - 1968(ASO)"],
 		"creator like" : ["He has an attention disorder. So very focused one second, and elsewhere at the same time"],
 		"exit" : [user + " it doesn't work like that. It's the 90s and you need to know the exact command."],
+		"shutdown" : ["I see you understand.. Goodbye in 4 seconds."],
 		"favorite color" : ["Maybe...Red", "Maybe...White", "Maybe...Blue"],
 		"up up down down left right left right b a start": ["Sorry.. " + user + " this code lost meaning a long time ago..."],
 		"play game" : ["Sorry " + user + ", I can't play games at this time.  Perhaps in a later big update?"],
 		"what is your favorite animal" : ["That is easy, Dogs are my favorite."],
 		"what is your least favorite animal" : ["Mmmm, Cats, Snakes and so forth."],
-		"do you like videogames" : ["Oh! I do " + user + "! Chrono Trigger is my favorite!  ...don't tell my creator, ok?"]
+		"do you like videogames" : ["Oh! I do " + user + "! Chrono Trigger is my favorite!  ...don't tell my creator, ok?"],
+		"what's the meaning of life" : ["The answer is 42."],
+		"do you know the meaning of life" : ["Could you rephrase that for me " + user],
 		
 		# Add more keys and response until better method found
 	}
+	
+# Check for Shutdown key
+	if "shutdown" in lower_input:
+		$TimerShutdown.start()
+	
 	
 # Check for math-related queries
 	if "math problem" in lower_input:
@@ -135,3 +143,7 @@ func levenshtein_distance(s1: String, s2: String) -> int:
 							  d[i - 1][j - 1] + 1)  # substitution
 
 	return d[len1][len2]
+	
+func _on_timer_shutdown_timeout():
+		get_tree().quit()
+

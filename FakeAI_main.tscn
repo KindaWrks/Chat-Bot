@@ -30,5 +30,9 @@ offset_right = 117.0
 offset_bottom = 250.0
 placeholder_text = "Enter Name"
 
+[node name="TimerShutdown" type="Timer" parent="."]
+wait_time = 4.0
+
 [connection signal="text_submitted" from="InputText" to="." method="_on_input_text_text_submitted"]
 [connection signal="text_submitted" from="username" to="." method="_on_username_text_submitted"]
+[connection signal="timeout" from="TimerShutdown" to="." method="_on_timer_shutdown_timeout"]
