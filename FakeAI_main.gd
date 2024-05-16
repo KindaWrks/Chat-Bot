@@ -48,6 +48,7 @@ func get_response(user_input: String) -> String:
 		"what's the meaning of life" : ["The answer is 42."],
 		"do you know the meaning of life" : ["Could you rephrase that for me " + user],
 		"do you know the date?" : [],
+		"what day is it" : [],
 		
 		# Add more keys and response until better method found
 	}
@@ -56,7 +57,12 @@ func get_response(user_input: String) -> String:
 #Currently pulls the date in the format of 06/31/1992
 	if "date" in lower_input:
 		var date = Time.get_datetime_dict_from_system()
-		return ("%s/%s/%s" % [date.month,date.day,date.year])
+		return ("The date is currently %s/%s/%s" % [date.month,date.day,date.year])
+		
+	if "day" in lower_input:
+		var day = Time.get_datetime_dict_from_system()
+		var day_of_week = ["Sunday, The day of rest.", "Monday, Here we go again..", "Tuesday.. Three more to go.", "It's Wednesday.", "It's Thursday my dude.", "Friday, almost free.", "Saturday, LET'S GO!!"][day.weekday]
+		return day_of_week
 	
 # Check for Shutdown key
 	if "shutdown" in lower_input:
