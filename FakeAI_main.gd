@@ -47,14 +47,20 @@ func get_response(user_input: String) -> String:
 		"do you like videogames" : ["Oh! I do " + user + "! Chrono Trigger is my favorite!  ...don't tell my creator, ok?"],
 		"what's the meaning of life" : ["The answer is 42."],
 		"do you know the meaning of life" : ["Could you rephrase that for me " + user],
+		"do you know the date?" : [],
 		
 		# Add more keys and response until better method found
 	}
 	
+
+#Currently pulls the date in the format of 06/31/1992
+	if "date" in lower_input:
+		var date = Time.get_datetime_dict_from_system()
+		return ("%s/%s/%s" % [date.month,date.day,date.year])
+	
 # Check for Shutdown key
 	if "shutdown" in lower_input:
 		$TimerShutdown.start()
-	
 	
 # Check for math-related queries
 	if "math problem" in lower_input:
@@ -66,6 +72,7 @@ func get_response(user_input: String) -> String:
 	for keyword in responses.keys():
 		if keyword in lower_input:
 			return responses[keyword].pick_random()
+
 
 	# If no direct match, check for similar words using Levenshtein distance
 	var best_match = ""
@@ -146,4 +153,5 @@ func levenshtein_distance(s1: String, s2: String) -> int:
 	
 func _on_timer_shutdown_timeout():
 		get_tree().quit()
+		
 
