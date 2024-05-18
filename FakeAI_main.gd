@@ -6,6 +6,9 @@ extends Node2D
 @onready var username = $username
 @onready var user = ""
 
+# Add the game logic
+@onready var choices = ["rock", "paper", "scissors"]
+
 func _on_username_text_submitted(_new_text):
 	user = username.text  # set users name
 	username.visible = false
@@ -41,7 +44,7 @@ func get_response(user_input: String) -> String:
 		"shutdown" : ["I see you understand.. Goodbye in 4 seconds."],
 		"favorite color" : ["Maybe...Red", "Maybe...White", "Maybe...Blue"],
 		"up up down down left right left right b a start": ["Sorry.. " + user + " this code lost meaning a long time ago..."],
-		"play game" : ["Sorry " + user + ", I can't play games at this time.  Perhaps in a later big update?"],
+		"play game" : ["Yes " + user + ", I can play one at this time.  Enter play rock paper scissors or Jan Ken Po followed by your throw." + "\n" + "Please reply with the throw in English."],
 		"what is your favorite animal" : ["That is easy, Dogs are my favorite."],
 		"what is your least favorite animal" : ["Mmmm, Cats, Snakes and so forth."],
 		"do you like videogames" : ["Oh! I do " + user + "! Chrono Trigger is my favorite!  ...don't tell my creator, ok?"],
@@ -73,6 +76,12 @@ func get_response(user_input: String) -> String:
 		var math_problem = extract_math_problem(lower_input)
 		if math_problem != "":
 			return solve_math_problem(math_problem)
+			
+# Parse user input for playing RPS game
+	if "play jan ken po" in lower_input or "play rock paper scissors" in lower_input:
+		var user_choice = lower_input.replace("play jan ken po", "").strip_edges().to_lower()
+		return play_jun_ken_po(user_choice)
+
 
 	# Check if any key matches the user input
 	for keyword in responses.keys():
@@ -129,7 +138,7 @@ func solve_math_problem(problem: String) -> String:
 	return "Unsupported operator: " + operator
 	
 	
-
+	
 func levenshtein_distance(s1: String, s2: String) -> int:
 	var len1 = s1.length()
 	var len2 = s2.length()
@@ -157,7 +166,33 @@ func levenshtein_distance(s1: String, s2: String) -> int:
 
 	return d[len1][len2]
 	
+	
 func _on_timer_shutdown_timeout():
 		get_tree().quit()
-		
+	
+	
+# Function to play "Rock,Paper,Scissors" with user input
+func play_jun_ken_po(user_choice: String) -> String:
+	var bot_choice = choices[randi() % choices.size()]
+	
+	# Ensure user input is valid
+	var valid_choices = ["rock", "paper", "scissors"]
+	if valid_choices.find(user_choice.to_lower()) == -1:
+		return "Invalid choice! Please choose 'Rock', 'Paper', or 'Scissors'."
+	
+	var result = determine_winner(bot_choice, user_choice)
+	
+	return "You chose " + user_choice.capitalize() + ". I chose " + bot_choice.capitalize() + ". " + result
+
+# Function to determine the winner
+func determine_winner(bot_choice, user_choice) -> String:
+	if bot_choice == user_choice:
+		return "It's a tie!"
+	elif ((bot_choice == "rock" and user_choice == "scissors") or
+		 (bot_choice == "paper" and user_choice == "rock") or
+		 (bot_choice == "scissors" and user_choice == "paper")):
+		return "I win!"
+	else:
+		return "You win!"
+
 
