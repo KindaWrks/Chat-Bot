@@ -114,28 +114,17 @@ func extract_math_problem(user_input: String) -> String:
 
 # Solves the math problem
 func solve_math_problem(problem: String) -> String:
-	# Split the problem into operands and operator
-	var parts = problem.split(" ")
-	if parts.size() != 3:
+	var expression = Expression.new()
+	var modified_problem = "(" + problem.replace(" ", "") + ")"
+	var error = expression.parse(modified_problem)
+	if error != OK:
 		return "Sorry, I couldn't understand the math problem."
 
-	var operand1 = parts[0].to_float()
-	var operand2 = parts[2].to_float()
-	var operator = parts[1]
-
-	if operator == "+":
-		return str(operand1 + operand2)
-	elif operator == "-":
-		return str(operand1 - operand2)
-	elif operator == "*":
-		return str(operand1 * operand2)
-	elif operator == "/":
-		if operand2 == 0:
-			return "Cannot divide by zero!"
-		else:
-			return str(operand1 / operand2)
-
-	return "Unsupported operator: " + operator
+	var result = expression.execute()
+	if result is int or result is float:
+		return str(result)
+	else:
+		return "Unsupported math problem."
 	
 	
 	
