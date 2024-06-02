@@ -53,6 +53,8 @@ func get_response(user_input: String) -> String:
 		"do you know the meaning of life" : ["Could you rephrase that for me " + user],
 		"do you know the date?" : [],
 		"what day is it" : [],
+		"what is love" : ["Baby don't hurt me."],
+		"are you connected to the internet" : ["No, " + user + "." + " I am not. I'm just a simple input/ouput."],
 		
 		# Add more keys and response until better method found
 	}
