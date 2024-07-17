@@ -25,7 +25,7 @@ func get_response(user_input: String) -> String:
 	# Convert user input to lowercase for case mismatch
 	var lower_input = user_input.to_lower()
 
-	# Define keys and replies possibly add more games?
+	# Define keys and replies possibly
 	var responses = {
 		"hi": ["Hi there " + user + "!", "Hello " + user + "!", "Hey " + user + "!"],
 		"hey": ["Hi there " + user + "!", "Hello " + user + "!", "Hey " + user + "!"],
